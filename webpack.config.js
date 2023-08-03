@@ -1,16 +1,16 @@
-const path = require('path')
-const nodeExcternals = require('webpack-node-externals')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const path = require('path');
+const nodeExcternals = require('webpack-node-externals');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const webpackconfig = {
   target: 'node',
   mode: 'development',
   entry: {
-    server: path.join(__dirname, 'src/index.js')
+    server: path.join(__dirname, 'src/index.js'),
   },
   output: {
     filename: '[name].bundle.js',
-    path: path.join(__dirname, './dist')
+    path: path.join(__dirname, './dist'),
   },
   devtool: 'eval-source-map',
   module: {
@@ -18,28 +18,21 @@ const webpackconfig = {
       {
         test: /\.(js|jsx)$/,
         use: {
-          loader: 'babel-loader'
+          loader: 'babel-loader',
         },
-        exclude: [path.join(__dirname, '/node_modules')]
-      }
-    ]
+        exclude: [path.join(__dirname, '/node_modules')],
+      },
+    ],
   },
   externals: [nodeExcternals()],
-  plugins: [
-    new CleanWebpackPlugin()
-  ],
+  plugins: [new CleanWebpackPlugin()],
   node: {
-    console: true,
     global: true,
-    process: true,
-    Buffer: true,
     __filename: true,
     __dirname: true,
-    setImmediate: true,
-    path: true
-  }
-}
+  },
+};
 
-console.log(webpackconfig)
+// console.log(webpackconfig);
 
-module.exports = webpackconfig
+module.exports = webpackconfig;
